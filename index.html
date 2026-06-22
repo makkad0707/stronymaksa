@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StronyMaksa.pl | Nowoczesne Strony WWW Poznań</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #171717;
+            --primary: #FFD700; /* Żółty */
+            --primary-hover: #FFC000;
+            --text: #f5f5f5;
+            --text-muted: #a3a3a3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+        
+        /* ŚWIETLISTA AURA ZA KURSOREM */
+        .cursor-aura {
+            position: fixed;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(0,0,0,0) 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Aura jest teraz z tyłu */
+            transition: left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s; /* Płynna smuga */
+        }
+        
+        /* Gwarancja, że wszystkie sekcje i teksty są nad aurą */
+        nav, .hero, section, footer { position: relative; z-index: 1; }
+
+        /* NAWIGACJA */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; background: rgba(10,10,10,0.9); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--text); letter-spacing: 1px; text-decoration: none; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { color: var(--text); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* BUTTONY (Efekty Hover) */
+        .btn { display: inline-block; padding: 15px 35px; background-color: var(--primary); color: #000; font-weight: 800; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.3s ease; border: 2px solid var(--primary); cursor: pointer; text-align: center; }
+        .btn:hover { background-color: transparent; color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2); }
+        .btn-outline { background: transparent; color: var(--text); border-color: #333; }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO SECTION */
+        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; }
+        .hero h1 { font-size: 60px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 20px; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
+
+        /* SEKCJE OGÓLNE */
+        section { padding: 100px 5vw; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 40px; text-align: center; margin-bottom: 15px; text-transform: uppercase; font-weight: 900; }
+        .section-title span { color: var(--primary); }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; font-size: 18px; }
+
+        /* KARTY OFERTY */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .card { background: var(--surface); padding: 50px 40px; border-radius: 12px; border: 1px solid #333; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: #555; }
+        .card:hover::before { transform: scaleX(1); }
+        .card h3 { font-size: 28px; margin-bottom: 15px; color: var(--primary); }
+        .card .price { font-size: 32px; font-weight: 900; margin-bottom: 20px; }
+        .card p { color: var(--text-muted); margin-bottom: 30px; font-size: 16px; }
+        .card ul { list-style: none; margin-bottom: 40px; color: #ddd; }
+        .card ul li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .card ul li::before { content: '✓'; color: var(--primary); font-weight: bold; }
+
+        .disclaimer { text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 30px; font-style: italic; }
+
+        /* PROGRAM POLECEŃ */
+        .referral-box { background: linear-gradient(135deg, #1f1a00 0%, var(--surface) 100%); border: 1px solid rgba(255,215,0,0.3); padding: 60px; border-radius: 12px; text-align: center; margin-top: 40px; }
+        .referral-box h2 { font-size: 36px; color: var(--primary); margin-bottom: 20px; }
+        .referral-box p { font-size: 18px; color: #ccc; margin-bottom: 30px; }
+        .referral-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: left; margin-top: 40px; }
+        .ref-item { background: rgba(0,0,0,0.4); padding: 30px; border-radius: 8px; border-left: 4px solid var(--primary); }
+
+        /* SEKCJA KONTAKTOWA (Nowość - potężny blok informacyjny) */
+        .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 40px; }
+        .contact-info-block { background: var(--surface); border: 1px solid #333; padding: 40px; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; }
+        .contact-method { margin-bottom: 35px; }
+        .contact-method:last-child { margin-bottom: 0; }
+        .contact-label { font-size: 14px; text-transform: uppercase; color: var(--primary); font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
+        .contact-value { 
+            font-size: clamp(18px, 2.5vw, 28px); /* Dynamicznie zmniejsza tekst, żeby się zmieścił */
+            font-weight: 900; 
+            color: #fff; 
+            letter-spacing: 0.5px; 
+            word-break: break-word; /* Łamie tylko całe słowa, a nie w połowie litery */
+            text-decoration: none; 
+            transition: color 0.3s; 
+            display: block; 
+        }
+        .contact-value:hover { color: var(--primary); }
+        
+        .contact-meta-block { background: #121212; border: 1px dashed #444; padding: 40px; border-radius: 12px; }
+        .meta-box { margin-bottom: 30px; }
+        .meta-box:last-child { margin-bottom: 0; }
+        .meta-box h4 { font-size: 20px; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .meta-box h4::before { content: '■'; color: var(--primary); font-size: 14px; }
+        .meta-box p { color: var(--text-muted); font-size: 16px; }
+
+        /* STOPKA */
+        footer { border-top: 1px solid #333; padding: 40px 5vw; text-align: center; margin-top: 80px; color: var(--text-muted); }
+        footer a { color: var(--primary); text-decoration: none; font-weight: bold; margin: 0 10px; transition: 0.3s; }
+        footer a:hover { color: #fff; }
+
+        /* KLASY DO ANIMACJI SCROLLOWANIA (Poprawione osie transformacji) */
+        .animate-up { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        
+        /* Precyzyjne klasy aktywujące animację */
+        .animate-up.in-view { opacity: 1; transform: translateY(0); }
+        .animate-left.in-view { opacity: 1; transform: translateX(0); }
+        .animate-right.in-view { opacity: 1; transform: translateX(0); }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-aura" id="aura"></div>
+
+    <nav>
+        <a href="#" class="logo">Strony<span>Maksa</span>.pl</a>
+        <ul>
+            <li><a href="#oferta">Oferta</a></li>
+            <li><a href="#polecenia">Program Poleceń</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="regulamin.html">Warunki i Zasady</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero animate-up">
+        <h1>Nie ruszysz z miejsca <br><span>bez dobrej strony WWW</span></h1>
+        <p>Projektuję szybkie, bezpieczne i zoptymalizowane strony internetowe dla biznesu. Jasne zasady, brak ukrytych kosztów. Działam na terenie Poznania i okolic.</p>
+        <div>
+            <a href="#oferta" class="btn">Sprawdź Ofertę</a>
+            <a href="#kontakt" class="btn btn-outline" style="margin-left: 15px;">Skontaktuj się</a>
+        </div>
+    </header>
+
+    <section id="oferta">
+        <h2 class="section-title animate-up">Wybierz to czego <span>potrzebujesz</span></h2>
+        <p class="section-subtitle animate-up">Dwie opcje dostosowane do potrzeb Twojego biznesu.</p>
+
+        <div class="grid">
+            <div class="card animate-left">
+                <div>
+                    <h3>Strona Wizytówka</h3>
+                    <div class="price">od 999 zł</div>
+                    <p>Idealne rozwiązanie na start dla usług, gastronomii, rzemiosła czy budowy mocnego portfolio wizerunkowego.</p>
+                    <ul>
+                        <li>Indywidualny, nowoczesny design</li>
+                        <li>Zakładki strukturalne przykładowo - O mnie, Oferta, Cennik, Kontakt</li>
+                        <li>Dedykowany formularz kontaktowy</li>
+                        <li>Idealne wyświetlanie na telefonach</li>
+                    </ul>
+                </div>
+                <a href="#kontakt" class="btn" style="width: 100%;">Wybierz Wizytówkę</a>
+            </div>
+
+            <div class="card animate-right">
+                <div>
+                    <h3>Strona ze Sklepem</h3>
+                    <div class="price">od 2500 zł</div>
+                    <p>Nowoczesny landing page / strona wizerunkowa wyposażona w bezpieczny moduł sprzedaży usług i produktów cyfrowych online 24/7.</p>
+                    <ul>
+                        <li>Wszystkie zalety strony wizytówkowej</li>
+                        <li>Integracja z certyfikowaną bezpieczną bramką Stripe</li>
+                        <li>Szybkie płatności BLIK, Apple Pay i karty</li>
+                        <li>Brak skomplikowanych i ciężkich baz danych</li>
+                    </ul>
+                </div>
+                <a href="#kontakt" class="btn" style="width: 100%;">Wybierz Sklep</a>
+            </div>
+        </div>
+        <p class="disclaimer animate-up">* Podane stawki są cenami startowymi. W przypadku wysoce zaawansowanych projektów o niestandardowej strukturze i unikalnych funkcjonalnościach, szczegółowa wycena przygotowywana jest indywidualnie.</p>
+    </section>
+
+    <section id="polecenia">
+        <div class="referral-box animate-up">
+            <h2>Zasada WIN-WIN</h2>
+            <p>Najlepszy biznes buduje się na zaufaniu i poleceniach. Dlatego przygotowałem system, w którym wygrywa każdy.</p>
+            
+            <div class="referral-grid">
+                <div class="ref-item animate-left">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">Dla Ciebie (Polecającego)</h3>
+                    <p>Za każdą firmę lub osobę, która zamówi u mnie stronę z Twojego polecenia, otrzymujesz <strong>pełny rok utrzymania Twojej strony całkowicie za darmo!</strong> 3 znajomych = 3 lata spokoju.</p>
+                </div>
+                <div class="ref-item animate-right">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">Dla Twojego Znajomego</h3>
+                    <p>Twój znajomy, powołując się na Ciebie podczas wyceny, otrzymuje <strong>5% rabatu na start</strong> na realizację całego projektu. Po prostu opłaca się przyjść od Ciebie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2 class="section-title animate-up">Zbudujmy coś <span>razem</span></h2>
+        <p class="section-subtitle animate-up">Skopiuj dane i napisz bezpośrednio lub po prostu zadzwoń. Omówmy szczegóły Twojej nowej strony.</p>
+
+        <div class="contact-wrapper">
+            <div class="contact-info-block animate-left">
+                <div class="contact-method">
+                    <div class="contact-label">Zadzwoń bezpośrednio</div>
+                    <a href="tel:+48453274571" class="contact-value">+48 453 274 571</a>
+                </div>
+                <div class="contact-method" style="margin-top: 30px;">
+                    <div class="contact-label">Napisz e-mail</div>
+                    <a href="mailto:kadziolkanowakmaksymilian@gmail.com" class="contact-value">kadziolkanowakmaksymilian@gmail.com</a>
+                </div>
+                
+            </div>
+
+            <div class="contact-meta-block animate-right">
+                <div class="meta-box">
+                    <h4>Godziny dostępności telefonicznej</h4>
+                    <p>Standardowo pracuję w godzinach <strong>9:00 - 18:00</strong> (od poniedziałku do piątku). Jeśli sprawa jest pilna, możesz śmiało próbować dzwonić chwilę po tych godzinach – jeśli tylko będę przy biurku, na pewno odbiorę.</p>
+                </div>
+                <div class="meta-box">
+                    <h4>Gwarancja oddzwonienia</h4>
+                    <p>Jeśli akurat prowadzę konsultacje, koduję lub nie mogę rozmawiać i nie odbiorę Twojego połączenia – daję pełną gwarancję, że <strong>oddzwonię w ciągu maksymalnie 48 godzin</strong>.</p>
+                </div>
+                <div class="meta-box">
+                    <h4>Lokalna współpraca</h4>
+                    <p>Działam w pełni zdalnie na terenie całego kraju, jednak w przypadku firm z <strong>Poznania i najbliższych okolic</strong>, z przyjemnością spotkam się na żywo przy dobrej kawie, aby wspólnie omówić architekturę projektu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 StronyMaksa.pl - Tworzenie Stron Internetowych (Poznań).</p>
+        <p style="margin-top: 15px;">
+            <a href="regulamin.html">Warunki, Utrzymanie i Zasady Umowy</a>
+        </p>
+    </footer>
+
+    <script>
+        // 1. ŚWIETLISTA AURA ZA KURSOREM
+        const aura = document.getElementById('aura');
+        document.addEventListener('mousemove', (e) => {
+            aura.style.left = e.clientX + 'px';
+            aura.style.top = e.clientY + 'px';
+        });
+
+        // 2. POPRAWIONE SCROLL ANIMATIONS (Intersection Observer)
+        const animatedElements = document.querySelectorAll('.animate-up, .animate-left, .animate-right');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

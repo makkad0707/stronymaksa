@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warunki i Zasady | StronyMaksa.pl</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #171717;
+            --primary: #FFD700;
+            --text: #f5f5f5;
+            --text-muted: #a3a3a3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.7; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; background: rgba(10,10,10,0.9); border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--text); text-decoration: none;}
+        .logo span { color: var(--primary); }
+        .back-btn { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; border: 1px solid var(--primary); padding: 8px 20px; border-radius: 4px; transition: 0.3s; }
+        .back-btn:hover { background: var(--primary); color: #000; }
+
+        .content { max-width: 800px; margin: 60px auto; padding: 0 20px; }
+        h1 { font-size: 42px; margin-bottom: 20px; color: var(--primary); text-transform: uppercase; }
+        h2 { font-size: 24px; margin-top: 50px; margin-bottom: 15px; color: #fff; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        p, ul { color: var(--text-muted); font-size: 16px; margin-bottom: 20px; }
+        ul { margin-left: 20px; }
+        li { margin-bottom: 10px; }
+        strong { color: #ddd; }
+
+        .price-box { background: var(--surface); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Strony<span>Maksa</span>.pl</a>
+        <a href="index.html" class="back-btn">Wróć do strony głównej</a>
+    </nav>
+
+    <div class="content">
+        <h1>Warunki Współpracy i Utrzymania</h1>
+        <p>Poniższe warunki określają ramy prawne i techniczne świadczenia usług administracji, utrzymania oraz wdrażania witryn internetowych.</p>
+
+        <h2>1. Czas Realizacji i Gwarancja Zwrotu</h2>
+        <p>Pracę nad kodem rozpoczynam po zaksięgowaniu wpłaty startowej (zadatku 30%) oraz otrzymaniu kompletu materiałów od Klienta (teksty, zdjęcia, informacje o firmie).</p>
+        <ul>
+            <li>Gotową stronę udostępniam w ciąguy 7 dni roboczych pod specjalnym adresem testowym do akceptacji.</li>
+            <li>W przypadku niedotrzymania tego terminu z wyłącznej winy Wykonawcy, Zamawiający ma prawo do natychmiastowego żądania pełnego zwrotu zadatku i anulowania umowy.</li>
+            <li>Po naniesieniu poprawek wizualnych i ostatecznej akceptacji przez Klienta oraz wpłaceniu reszty kwoty strona zostaje wdrożona pod docelową domenę.</li>
+            <li>Wyraźna, ostateczna akceptacja witryny testowej przez Klienta i podpięcie jej pod domenę docelową oznacza pełne wykonanie usługi i zamyka możliwość odstąpienia od umowy z tytułu zwrotu kosztów za spersonalizowany produkt cyfrowy.</li>
+        </ul>
+
+        <h2>2. Koszty Utrzymania Technicznego</h2>
+        <p>Abonament roczny eliminuje konieczność zakupu drogich serwerów zewnętrznych przez Klienta i przerzuca techniczną opiekę nad kodem na Wykonawcę.</p>
+        
+        <div class="price-box">
+            <strong>Strona Wizytówka:</strong> 250 zł / rok <br>
+            <strong>Strona ze Sklepem:</strong> 499 zł / rok
+        </div>
+
+        <p><strong>Opłata roczna obejmuje:</strong></p>
+        <ul>
+            <li>Zakup, rejestrację oraz coroczne przedłużenie domeny docelowej Zamawiającego.</li>
+            <li>Utrzymanie plików na bezawaryjnej strukturze serwerowej z certyfikatem bezpieczeństwa SSL.</li>
+            <li><strong>Pakiet do 5 aktualizacji miesięcznie :</strong> Obejmuje modyfikacje cen, zamianę zdjęć, aktualizację opisów usług lub podpięcie nowych linków płatniczych Stripe. Zmiany są wprowadzane w dni robocze.</li>
+        </ul>
+
+        <h2>3. Jak działają e-Sklepy i moduł Stripe?</h2>
+        <p>Strony z modułem sprzedaży opierają się na zaawansowanej architekturze powiązanej z systemem <strong>Stripe</strong>. Względy bezpieczeństwa nakazują minimalizację zagrożeń wynikających z wycieków haseł.</p>
+        <ul>
+            <li>Moje sklepy <strong>nie posiadają baz danych klientów ani systemów logowania</strong>. Wszystko opiera się na szybkich linkach płatniczych wygenerowanych w Stripe.</li>
+            <li>Zamawiający zakłada konto Stripe samodzielnie (przy instruktażowym wsparciu Wykonawcy). Orientacyjne koszty transakcyjne operatora Stripe wynoszą ok. 1.5% + 1 zł za udaną płatność i mogą ulec zmianie, jako że Stripe jest podmiotem niezależnym.</li>
+            <li>Pieniądze klientów trafiają na konto Stripe, które jest własnością zamawiającego stronę, a stamtąd przelewane są na jego konto bankowe.</li>
+            <li>Proces przekazania zamówionego produktu lub umówienia zakupionej usługi realizowany jest przez narzędzia wbudowane w system płatniczy np. za pomocą automatycznie wysyłającego się maila do klienta po płatności z kupionym np. ebookiem.</li>
+        </ul>
+
+        <h2>4. Czas Trwania Umowy i Procedura Zakończenia</h2>
+        <p>Umowa o administrację i utrzymanie witryny zostaje zawarta na <strong>okres 3 lat (36 miesięcy)</strong> od dnia jej wdrożenia, z możliwością jej przedłużenia.</p>
+        <ul>
+            <li><strong>Rezygnacja Zamawiającego:</strong> Brak opłacenia abonamentu na kolejny rok skutkuje wyłączeniem strony. W ciągu 7 dni od wygaśnięcia umowy Wykonawca przekazuje Klientowi kompletną paczkę .ZIP z pełnym kodem źródłowym strony oraz zrzeka się praw do szaty graficznej na rzecz Klienta, umożliwiając mu przeniesienie strony na dowolny własny hosting.</li>
+            <li><strong>Wypowiedzenie Wykonawcy:</strong> Wykonawca zastrzega sobie prawo do zakończenia opieki nad stroną z zachowaniem 3-miesięcznego okresu wypowiedzenia. Zobowiązuje się wtedy do darmowego wydania kodu AuthINFO (transfer domeny na Klienta) oraz bezpłatnego przekazania pełnej paczki .ZIP z kodem strony Zamawiającemu.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
