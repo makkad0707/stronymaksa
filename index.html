@@ -119,8 +119,30 @@
         .animate-up.in-view { opacity: 1; transform: translateY(0); }
         .animate-left.in-view { opacity: 1; transform: translateX(0); }
         .animate-right.in-view { opacity: 1; transform: translateX(0); }
-
-    </style>
+        
+        /* WERSJA MOBILNA (TELEFONY) */
+        @media (max-width: 768px) {
+            /* Nawigacja */
+            nav { flex-direction: column; gap: 15px; text-align: center; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            
+            /* Zmniejszenie nagłówków */
+            .hero h1 { font-size: 38px; margin-top: 20px; }
+            .hero p { font-size: 16px; }
+            .section-title { font-size: 32px; }
+            
+            /* Marginesy i paddingi */
+            section { padding: 60px 5vw; }
+            .card { padding: 30px 20px; }
+            .referral-box { padding: 30px 20px; }
+            .contact-info-block, .contact-meta-block { padding: 25px; }
+            
+            /* Ułożenie przycisków w Hero jeden pod drugim */
+            .hero > div { display: flex; flex-direction: column; width: 100%; max-width: 320px; gap: 15px; }
+            .btn { width: 100%; margin-left: 0 !important; }
+        }
+  
+  </style>
 </head>
 <body>
 
